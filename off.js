@@ -1,13 +1,14 @@
 const fs = require('fs');
 const exec = require('child_process').exec;
+const utils = require('./utils.js');
 
 var log = (error, stdout, stderr) => console.log(stdout, stderr);
 
 module.exports = {
     git,
     npm,
-    maven,
     curl,
+    maven,
     pac
 };
 
@@ -21,21 +22,21 @@ function npm(){
     exec("npm config rm https-proxy", log);
 }
 
+function curl(config){
+    if(config.gitBash.active){
+        opts.shell = config.gitBash.shell
+        exec("alias curl=''", { shell : config.gitBash.shell }, log);
+    } else {
+        exec("set HTTP_PROXY=", log);
+        exec("set HTTPS_PROXY=", log);
+    }
+}
+
 function maven(){
     exec("ls -la", log);
 }
 
-function curl(){
-    exec("ls -la", log);
-}
 
 function pac(){
     exec("ls -la", log);
 }
-
-/**
- * Curl
- * 
- * ~/.curlrc
- * alias curl="curl --config --proxy ~/.curlrc"
- */

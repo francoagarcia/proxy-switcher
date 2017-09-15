@@ -24,13 +24,14 @@ switch(command){
 }
 
 function doOn(){
-    turnOn.test(config);
     // turnOn.git(config.proxy);
     // turnOn.npm(config.proxy);
+    // turnOn.curl(config);
 }
 
 function doOff(){
     // turnOff.git();
     // turnOff.npm();
+    // turnOff.curl(config);
 }
 
