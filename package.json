@@ -1,0 +1,11 @@
+{
+  "name": "proxy-switcher",
+  "version": "1.0.0",
+  "description": "on && off proxy for win",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
+}
