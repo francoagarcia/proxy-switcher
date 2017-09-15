@@ -1,5 +1,4 @@
 {
-    "cmdLineTool" : "bash", 
     "windowsUser" : "franco.garcia",
     "proxy" : {
         "host" : "192.168.20.100",
@@ -10,5 +9,10 @@
     "pacFile" : "proxy.pac",
     "infileSettings" : [
         "C:\\Users\\franco.garcia\\.m2\\settings.xml"
-    ]
+    ],
+    "gitBash" : {
+        "shell" : "C:\\Program Files\\Git\\git-bash.exe",
+        "active" : false
+    }
+
 }

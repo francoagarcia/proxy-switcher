@@ -2,10 +2,13 @@
   "name": "proxy-switcher",
   "version": "1.0.0",
   "description": "on && off proxy for win",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "test"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^8.0.2"
+  }
 }
