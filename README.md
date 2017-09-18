@@ -1,13 +1,22 @@
 # Proxy Switcher
 ## Requirements
 1. nodejs v6 en adelante
-2. Para un correcto funcionamiento ejecutar en git-bash.
 
 ## Setup
-1. set your data in `config.json`:
+1. set proxy config in `config.json`.
 
 ## Run
 ```bash
-node index.js on    # Set proxy on
-node index.js off   # Set proxy off
+node app.js --help
+node app.js on      # Set proxy on
+node app.js off     # Set proxy off
 ```
+
+Luego se modificarán los siguientes componentes:
+- Git en `~/.gitconfig`.
+- NPM en `~/.npmrc`.
+- Curl en `~/.curlrc`.
+    - En git-bash, además se ejecutará `alias curl=...` para que curl tome el proxy en cada ejecución.
+    - En CMD, además se ejecutará `set HTTP_PROXY=...` para que curl tome el proxy en cada ejecución.
+- Maven en `~/.m2/settings.xml`.
+- Se habilitará/deshabilitará el proxy global de Windows.

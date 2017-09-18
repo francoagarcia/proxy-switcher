@@ -5,14 +5,14 @@ const turnOn = require('./on.js');
 const turnOff = require('./off.js');
 
 const argv = yargs
-    .command('on', 'Turn ON proxy settings')
-    .command('off', 'Turn OFF proxy settings')
+    .command('on', 'Turn ON all proxy settings')
+    .command('off', 'Turn OFF all proxy settings')
     .help()
     .argv;
 
 var command = argv._[0];
 
-switch(command){
+switch (command) {
     case 'on':
         doOn();
         break;
@@ -23,15 +23,19 @@ switch(command){
         console.log("Command not recognized");
 }
 
-function doOn(){
-    // turnOn.git(config.proxy);
-    // turnOn.npm(config.proxy);
-    // turnOn.curl(config);
+function doOn() {
+    turnOn.system(config);
+    turnOn.git(config);
+    turnOn.npm(config);
+    turnOn.curl(config);
+    turnOn.maven(config);
 }
 
-function doOff(){
-    // turnOff.git();
-    // turnOff.npm();
-    // turnOff.curl(config);
+function doOff() {
+    turnOff.system();
+    turnOff.git();
+    turnOff.npm();
+    turnOff.curl(config);
+    turnOff.maven(config);
 }
 
