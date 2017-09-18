@@ -1,5 +1,5 @@
-const xml2js = require('xml2js');
 const fs = require('fs');
+const xml2js = require('xml2js');
 const exec = require('child_process').exec;
 
 module.exports = {
@@ -7,6 +7,8 @@ module.exports = {
     getProxyWithoutCredentials,
     getCurlrc,
     getUserHome,
+    execCmd,
+    execInBash,
     getProxySettingsXML,
     getProxiesSettingsXML,
     getSettingsXML,
@@ -34,6 +36,15 @@ function getProxyWithoutCredentials(protocol, proxy) {
 
 function getUserHome() {
     return process.env.HOME || process.env.USERPROFILE;
+}
+
+function execCmd(command){
+    exec(command, logExec);
+}
+
+function execInBash(command, config){
+    if(config.gitBashShell)
+        exec(command, { shell : config.gitBashShell }, logExec);
 }
 
 function setSystemProxy(proxy) {

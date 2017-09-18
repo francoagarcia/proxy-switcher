@@ -1,10 +1,6 @@
 const fs = require('fs');
-const exec = require('child_process').exec;
 const utils = require('./utils.js');
-const xml2js = require('xml2js');
 const parseString = require('xml2js').parseString;
-
-let logExec = (error, stdout, stderr) => console.log(stdout, stderr);
 
 module.exports = {
     system,
@@ -19,18 +15,18 @@ function system() {
 }
 
 function git() {
-    exec("git config --global --unset http.proxy", logExec);
-    exec("git config --global --unset https.proxy", logExec);
+    utils.execCmd("git config --global --unset http.proxy");
+    utils.execCmd("git config --global --unset https.proxy");
 }
 
 function npm() {
-    exec("npm config rm proxy", logExec);
+    utils.execCmd("npm config rm proxy");
 }
 
 function curl(config) {
-    exec("alias curl=''", { shell: config.gitBashShell }, logExec);
-    exec("set HTTP_PROXY=", logExec);
-    exec("set HTTPS_PROXY=", logExec);
+    utils.execInBash("alias curl=''", config);
+    utils.execCmd("set HTTP_PROXY=");
+    utils.execCmd("set HTTPS_PROXY=");
 }
 
 function maven(config) {

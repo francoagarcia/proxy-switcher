@@ -1,10 +1,6 @@
 const fs = require('fs');
-const exec = require('child_process').exec;
 const utils = require('./utils.js');
-const xml2js = require('xml2js');
 const parseString = require('xml2js').parseString;
-
-let logExec = (error, stdout, stderr) => console.log(stdout, stderr);
 
 module.exports = {
     system,
@@ -20,12 +16,12 @@ function system(config) {
 }
 
 function git(config) {
-    exec("git config --global http.proxy " + utils.getProxy('http', config.proxy), logExec);
-    exec("git config --global https.proxy " + utils.getProxy('https', config.proxy), logExec);
+    utils.execCmd("git config --global http.proxy " + utils.getProxy('http', config.proxy));
+    utils.execCmd("git config --global https.proxy " + utils.getProxy('https', config.proxy));
 }
 
 function npm(config) {
-    exec("npm config set proxy " + utils.getProxy('http', config.proxy), logExec);
+    utils.execCmd("npm config set proxy " + utils.getProxy('http', config.proxy));
 }
 
 function curl(config) {
@@ -34,9 +30,9 @@ function curl(config) {
         console.log("No existe .curlrc -> Lo creo y agrego proxy");
         fs.writeFileSync(curlrcPath, utils.getCurlrc(config.proxy));
     }
-    exec("alias curl='curl --config --proxy " + curlrcPath + "'", { shell: config.gitBashShell }, logExec);
-    exec("set HTTP_PROXY=" + utils.getProxy('http', config.proxy), logExec);
-    exec("set HTTPS_PROXY=" + utils.getProxy('https', config.proxy), logExec);
+    utils.execInBash("alias curl='curl --config --proxy " + curlrcPath + "'", config);
+    utils.execCmd("set HTTP_PROXY=" + utils.getProxy('http', config.proxy));
+    utils.execCmd("set HTTPS_PROXY=" + utils.getProxy('https', config.proxy));
 }
 
 function maven(config) {
