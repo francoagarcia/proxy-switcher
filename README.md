@@ -24,9 +24,9 @@ This script will:
     - set environment variables in windows cmd: `set HTTP_PROXY=...`.
 
 All the programs available until now are located in the `/programs` directory. Each one has only 3 methods:
-    - `on(config)`.
-    - `off(config)`.
-    - `isEnabled()`.
+- `on(config)`.
+- `off(config)`.
+- `isEnabled(config)`.
 
 The name of the file ***must be equals*** to the name setted in the *programs array* in the `config.json`.
 
@@ -35,7 +35,7 @@ You also can put your custom configuration for each program in the `config.json`
 ```json
 {
     "proxy": {
-        ...
+        //...user proxy configuration
     },
     "programs" : [
         "maven"

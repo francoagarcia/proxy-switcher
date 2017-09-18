@@ -12,6 +12,13 @@ const argv = yargs
 
 var command = argv._[0];
 
+/**
+ * TODO
+ * 
+ * Eliminar el on.js y el off.js ? Que solo quede el proxy-switcher.js y desde ahí se invoque todo.
+ * Ver el tema de customizar cada programa
+ */
+
 switch (command) {
     case 'on':
         doOn();

@@ -20,6 +20,6 @@ function off() {
     utils.execCmd("git config --global --unset https.proxy");
 }
 
-function isEnabled(){
+function isEnabled(config){
     return false;
 }

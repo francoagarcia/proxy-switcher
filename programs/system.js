@@ -11,14 +11,28 @@ module.exports = {
 };
 
 function on(config) {
-    utils.setSystemProxy(config.proxy);
-    utils.turnSystemProxy(true);
+    setSystemProxy(config.proxy);
+    turnSystemProxy(true);
 }
 
 function off(config) {
-    utils.turnSystemProxy(false);
+    turnSystemProxy(false);
 }
 
-function isEnabled(){
+function isEnabled(config){
     return false;
+}
+
+/***************************************
+ ********** Private functions **********
+ ***************************************/
+function setSystemProxy(proxy) {
+    exec(`reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" ` +
+        `/v ProxyServer /t REG_SZ /d ${proxy.host}:${proxy.port} /f`, logExec);
+}
+
+function turnSystemProxy(bool) {
+    let enabled = new Number(bool);
+    exec(`reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" ` + 
+        `/v ProxyEnable /t REG_DWORD /d ${enabled} /f`, logExec);
 }

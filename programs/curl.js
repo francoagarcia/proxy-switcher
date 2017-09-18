@@ -14,7 +14,7 @@ function on(config) {
     let curlrcPath = utils.getUserHome() + '\\.curlrc';
     if (!fs.existsSync(curlrcPath)) {
         console.log("No existe .curlrc -> Lo creo y agrego proxy");
-        fs.writeFileSync(curlrcPath, utils.getCurlrc(config.proxy));
+        fs.writeFileSync(curlrcPath, getCurlrc(config.proxy));
     }
     utils.execInBash("alias curl='curl --config --proxy " + curlrcPath + "'", config);
     utils.execCmd("set HTTP_PROXY=" + utils.getProxy('http', config.proxy));
@@ -27,6 +27,14 @@ function off(config) {
     utils.execCmd("set HTTPS_PROXY=");
 }
 
-function isEnabled(){
+function isEnabled(config){
     return false;
+}
+
+/***************************************
+ ********** Private functions **********
+ ***************************************/
+function getCurlrc(proxy) {
+    return "proxy=" + getProxy('http', proxy) + "\n" +
+        "https_proxy=" + getProxy('https', proxy) + "\n";
 }

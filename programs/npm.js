@@ -18,6 +18,6 @@ function npm(config) {
     utils.execCmd("npm config rm proxy");
 }
 
-function isEnabled(){
+function isEnabled(config){
     return false;
 }
