@@ -8,7 +8,7 @@ module.exports = {
     getCurlrc,
     getUserHome,
     execCmd,
-    execInBash,
+    execInBash, //TODO rename exec in execInGitBash
     getProxySettingsXML,
     getProxiesSettingsXML,
     getSettingsXML,

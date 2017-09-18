@@ -6,5 +6,10 @@
         "pass": "Experta2017"
     },
     "mavenSettingsXML": "C:\\Users\\franco.garcia\\.m2\\settings.xml",
-    "gitBashShell": "C:\\Program Files\\Git\\git-bash.exe"
+    "programs" : [
+        "git",
+        "npm",
+        "curl",
+        "maven"
+    ]
 }
