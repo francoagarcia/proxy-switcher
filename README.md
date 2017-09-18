@@ -35,7 +35,6 @@ You also can put your custom configuration for each program in the `config.json`
 ```json
 {
     "proxy": {
-        //...user proxy configuration
     },
     "programs" : [
         "maven"
