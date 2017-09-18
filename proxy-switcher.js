@@ -32,9 +32,9 @@ function doOn() {
 }
 
 function doOff() {
-    turnOff.system();
-    turnOff.git();
-    turnOff.npm();
+    turnOff.system(config);
+    turnOff.git(config);
+    turnOff.npm(config);
     turnOff.curl(config);
     turnOff.maven(config);
 }

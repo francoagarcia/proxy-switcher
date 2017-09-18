@@ -4,7 +4,7 @@ const utils = require('./utils.js');
 const xml2js = require('xml2js');
 const parseString = require('xml2js').parseString;
 
-let log = (error, stdout, stderr) => console.log(stdout, stderr);
+let logExec = (error, stdout, stderr) => console.log(stdout, stderr);
 
 module.exports = {
     system,
@@ -19,25 +19,20 @@ function system() {
 }
 
 function git() {
-    exec("git config --global --unset http.proxy", log);
-    exec("git config --global --unset https.proxy", log);
+    exec("git config --global --unset http.proxy", logExec);
+    exec("git config --global --unset https.proxy", logExec);
 }
 
 function npm() {
-    exec("npm config rm proxy", log);
+    exec("npm config rm proxy", logExec);
 }
 
 function curl(config) {
-    exec("alias curl=''", { shell: config.gitBashShell }, log);
-    exec("set HTTP_PROXY=", log);
-    exec("set HTTPS_PROXY=", log);
+    exec("alias curl=''", { shell: config.gitBashShell }, logExec);
+    exec("set HTTP_PROXY=", logExec);
+    exec("set HTTPS_PROXY=", logExec);
 }
 
-/**
- * Veo si existe el settings.xml
- *  no existe: -
- *  existe: parseo y borro el <Proxy>
- */
 function maven(config) {
     if (fs.existsSync(config.mavenSettingsXML)) {
         fs.readFile(config.mavenSettingsXML, 'utf-8', function (err, settingsStr) {

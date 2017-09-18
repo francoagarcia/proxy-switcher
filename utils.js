@@ -17,7 +17,7 @@ module.exports = {
     turnSystemProxy
 };
 
-let log = (error, stdout, stderr) => console.log(stdout, stderr);
+let logExec = (error, stdout, stderr) => console.log(stdout, stderr);
 
 function getCurlrc(proxy) {
     return "proxy=" + getProxy('http', proxy) + "\n" +
@@ -38,13 +38,13 @@ function getUserHome() {
 
 function setSystemProxy(proxy) {
     exec(`reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" ` +
-        `/v ProxyServer /t REG_SZ /d ${proxy.host}:${proxy.port} /f`, log);
+        `/v ProxyServer /t REG_SZ /d ${proxy.host}:${proxy.port} /f`, logExec);
 }
 
 function turnSystemProxy(bool) {
     let enabled = new Number(bool);
     exec(`reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" ` + 
-        `/v ProxyEnable /t REG_DWORD /d ${enabled} /f`, log);
+        `/v ProxyEnable /t REG_DWORD /d ${enabled} /f`, logExec);
 }
 
 function getSettingsXML(proxy) {
@@ -77,9 +77,10 @@ function existeProxyEnSettingsXML(settingsJson, protocol, proxy) {
         return false;
 
     return settingsJson.settings.proxies[0].proxy
-        .filter(p => p.protocol[0] === protocol &&
-            p.host[0] === proxy.host &&
-            p.port[0] == proxy.port).length > 0;
+                    .filter(p => p.protocol[0] === protocol &&
+                                 p.host[0] === proxy.host &&
+                                 p.port[0] == proxy.port)
+                    .length > 0;
 }
 
 function addProxyToSettingsXML(config, settingsJson, protocol, proxy) {
@@ -99,7 +100,6 @@ function addProxyToSettingsXML(config, settingsJson, protocol, proxy) {
 
     settingsJson.settings.proxies[0].proxy.push(proxyXML);
     saveSettingsXML(config, settingsJson);
-    console.log(`Se agregó correctamente el proxy ${protocol} al settings.xml`);
 }
 
 function removeProxies(config, settingsJson){
