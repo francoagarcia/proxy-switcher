@@ -1,0 +1,10 @@
+{
+    "proxy": {
+        "host": "hostPort",
+        "port": "proxyPort",
+        "user": "proxyUser",
+        "pass": "proxyPass"
+    },
+    "mavenSettingsXML": "path\\to\\settings.xml",
+    "gitBashShell": "path\\to\\Git\\git-bash.exe"
+}
